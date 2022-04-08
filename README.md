@@ -1785,4 +1785,152 @@ game()
 
 ```
 
-테스트~~~
+
+<br><br>
+4/7 커피머신
+```py
+
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+money = 0
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
+
+def resources_sufficient(drink):
+    for item in drink:  # drink 의 키값이 나옴. 나중에 파라먼트에다가 더 깊히 집어넣으면 숫자로 내보내질수있어
+        if resources[item] < drink[item]: #resoureces = {water:300, milk;200, coffe:100} item 1번째[water]
+            print("Sorry there is not enough resources.")
+            return False
+        return True
+
+
+def process_coins():
+    quarters = int(input("how many quarters?")) * 0.25
+    dimes = int(input("how many dimes?")) * 0.10
+    nickles = int(input("how many nickles?")) * 0.05
+    pennies = int(input("how many pennies?")) * 0.01
+    total = quarters + dimes + nickles + pennies
+    return total
+
+
+def transaction_successful(menu_cost, inserted_coin):
+    global money
+    if menu_cost <= inserted_coin:
+        change = round(inserted_coin - menu_cost, 2)
+        money += round(inserted_coin-change, 2)
+        print(f"Here is ${change} dollars in change.")
+        return True
+    else:
+        print("Sorry that's not enough money. Money refunded.")
+        return False
+
+def report():
+    print(f"water: {resources['water']}")  # f스트링과 딕셔너리 함께 쓰는법 **
+    print(f"milk: {resources['milk']} ")
+    print(f"coffee: {resources['coffee']} ")
+    print(f"money : {money}")
+
+
+def make_coffee(drink_name, order_ingredients):
+    """Deduct the required ingredients from the resources."""
+    for item in order_ingredients:  # water milk 차례대로 들어가게 만듬
+        resources[item] -= order_ingredients[item]
+    print(f"Here is your {drink_name} ☕️. Enjoy!")
+
+
+is_going = True
+while is_going:  # 무한반복
+    answer = input("What would you like? (espresso / latte / cappuccino) : ")
+    if answer == "off":  # 첫번째 실수
+        is_going = False
+    elif answer == "report":
+        print(f"water: {resources['water']}")  # f스트링과 딕셔너리 함께 쓰는법 **
+        print(f"milk: {resources['milk']} ")
+        print(f"coffee: {resources['coffee']} ")
+        print(f"money : ${money}")
+    else:
+        drink = MENU[answer] #MENU[latte] -> "ingredients":"water": 200 ..."cost": ...
+        if resources_sufficient(drink["ingredients"]):   #latte["ingredients"] -> water:x , milk:y ...
+            pay = process_coins()
+            if transaction_successful(drink["cost"], pay):
+                make_coffee(answer, drink["ingredients"])
+
+*딕셔너리는 불러올때 지정하면 ex)while문 안에 drink=MENU[ansewr]  되서 함수를 만들때는 자릿수를 상관할필요가 없는거같다.
+
+```
+CONSOLE
+```
+What would you like? (espresso / latte / cappuccino) : latte
+how many quarters?9
+how many dimes?9
+how many nickles?9
+how many pennies?9
+Here is $1.19 dollars in change.
+Here is your latte ☕️. Enjoy!
+What would you like? (espresso / latte / cappuccino) : report
+water: 100
+milk: 50 
+coffee: 76 
+money : $2.5
+What would you like? (espresso / latte / cappuccino) : off
+```
+
+<br><br>
+**그외 문법 정리**
+```
+1.with
+: 다른 파일을 가져오거나 생성도 가능
+
+ex) 50주차의 보고서 파일을 만드는 프로그램을 작성하라(총50개의 파일을 생성)
+for i in range(1, 51)
+  with open(srt(i) + "주차", "w", encoding="uft8")as report_file:
+# (제목/"w"=작성한다는의미 / "utf8"=한글사용/ "as"=변수이름지정
+  report_file.write("파이썬공부중이에요")
+
+console
+파이썬공부중이에요 라는 내용의 50개 문서가 생김
+
+
+2.클래스
+class Unit:  #(class 임의 이름)
+    def __init__(self, name, hp, damage):
+        self.name = name
+        self.hp = hp
+        self.damage = damage
+        print("{0} 유닛이 생성되어다)
+
+    def attack(self, location)
+
+여러 def를 넣어서 복합적으로 사용이 가능함..
+
+
+
+
+```
