@@ -1904,7 +1904,7 @@ What would you like? (espresso / latte / cappuccino) : off
 
 <br><br>
 **그외 문법 정리**
-```
+```py
 1.with
 : 다른 파일을 가져오거나 생성도 가능
 
@@ -1918,17 +1918,146 @@ console
 파이썬공부중이에요 라는 내용의 50개 문서가 생김
 
 
-2.클래스
+2.클래스 (필요한 이유:   )
 class Unit:  #(class 임의 이름)
     def __init__(self, name, hp, damage):
         self.name = name
         self.hp = hp
         self.damage = damage
-        print("{0} 유닛이 생성되어다)
+        print("{0} 유닛이 생성되었다".format(self.name)
+        print("체력: {0}, 공격력: {1}".format(self.hp, self.damage))
 
-    def attack(self, location)
+2-1 사용법:  
+marine1 = Unit("마린",40,5) #객체라 함
+tank = Unit("탱크",150,35) 
 
-여러 def를 넣어서 복합적으로 사용이 가능함..
+2-2 init 이란?
+생성자 : init 함수에 지정된 알규먼트 만큼 넣어줘야함 3개
+
+2-3 멤버변수란?
+클래스안에 지정된 것들
+ex) self.name = name 
+
+#예시 1 ! 외부에서 하나 워렛이란걸 만들어봅시다
+wraith = Unit("레이스",80,5)
+print("유닛이름:{0},공격력:{1}".format(wraith.name, wraith.damage))
+#이렇게 기존에 설정된 변수에 새로운 변수를 넣어 응용이 가능함
+
+console : 
+레이스 유닛이 생성되었다. #-> def init 내부함수값
+체력: 80, 공격력: 5     #-> def init 내부함수값
+유닛이름:레이스, 공격력:5 #-> def init을 응용한 외부 함수값
+
+#예시 2!
+wraith2 = Unit("빼앗은 레이스",80,5) #1. Unit 이용
+wraith2.clocking = True #이용된 함수에 .clocking 이라는 변수를 추가해줌
+
+if wraith2.clocking == True:
+print("{}는 클로킹이다".format(wraith2.name))
 
 
-```
+2-4 메소드란?
+class AttackUnit: 
+    def __init__(self, name, hp, damage):
+        self.name = name
+        self.hp = hp
+        self.damage = damage
+        
+
+    def attack(self, location):
+        print("{0}:{1} 방향으로 공격. 공격력:{2}".format(self.name, location, self.damage)) #def 다른데 여기서 불러와지는 {0}:self.name은 위에서 정의된애로 불러와진다!!
+        #location 은 어택함수에서 받은 애로 불러와짐
+
+    def damaged(self, damage):
+        print("{0}:{1} 데미지입음.".format(self.name, damage)) 
+        self.hp -= damage
+        print("현재체력{0}".format(self.hp))
+        if self.hp <= 0:
+          print("{0} 파괴됨".format(self.name))
+
+
+#적용해보자
+#1번째로 할것: AttackUnit 클래스 적용하기
+firevat1 = AttackUnit("파이어뱃",50,16) #프린트따로 안됨 (생성자라서 지정만해줌)
+#기본 클래스가 적용된 상태에서 내부함수를 적용
+firevat1.attack("5시")
+firevat1.damaged(25)
+firevat1.damaged(25)
+
+console
+파이어뱃:5시 방향으로 공격. 공격력:16
+파이어뱃:25 데미지입음.
+현재체력25
+파이어뱃:25 데미지입음.
+현재체력0
+파이어뱃 파괴됨
+
+
+2-5 상속이란?
+기본클래스와 또다른클래스의 겹치는 부분이 있다면 상속을 통해 처리한다.
+
+#기본유닛
+class Unit: 
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+
+#어택유닛
+class AttackUnit(Unit): #1번. name과 hp가 겹치니 상속이 필요 --> 유닛옆 ()안에 상속받을 기본클래스명 넣기
+    def __init__(self, name, hp, damage):
+        #self.name = name #2번. 겹치는부분삭제
+        #self.hp = hp
+        Unit.__init__(self, name, hp)#3번. 클래스 호출
+        self.damage = damage #4번.(응용): 기본클래스에 없는 다른변수를 추가함
+        
+
+    def attack(self, location):
+        print("{0}:{1} 방향으로 공격. 공격력:{2}".format(self.name, location, self.damage))
+        
+    def damaged(self, damage):
+        print("{0}:{1} 데미지입음.".format(self.name, damage)) 
+        self.hp -= damage
+        print("현재체력{0}".format(self.hp))
+        if self.hp <= 0:
+          print("{0} 파괴됨".format(self.name))
+
+#적용해보자
+#firbat = Unit("파이어뱃",50) 틀림 Unit을 AttackUnit에 상속했으니 쓸 필요 없음!!
+firbat = AttackUnit("파이어뱃",50,16)
+firbat.damaged(25)
+firbat.damaged(25)
+
+console
+파이어뱃:25 데미지입음.
+현재체력25
+파이어뱃:25 데미지입음.
+현재체력0
+파이어뱃 파괴됨
+
+2-6 다중상속이란?
+상속받는게 두개 이상인것
+
+class Unit: 
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+
+#어택유닛
+class AttackUnit(Unit): #1번. name과 hp가 겹치니 상속이 필요 --> 유닛옆 ()안에 상속받을 기본클래스명 넣기
+    def __init__(self, name, hp, damage):
+        #self.name = name #2번. 겹치는부분삭제
+        #self.hp = hp
+        Unit.__init__(self, name, hp)#3번. 클래스 호출
+        self.damage = damage #4번.(응용): 기본클래스에 없는 다른변수를 추가함
+        
+
+    def attack(self, location):
+        print("{0}:{1} 방향으로 공격. 공격력:{2}".format(self.name, location, self.damage))
+        
+    def damaged(self, damage):
+        print("{0}:{1} 데미지입음.".format(self.name, damage)) 
+        self.hp -= damage
+        print("현재체력{0}".format(self.hp))
+        if self.hp <= 0:
+          print("{0} 파괴됨".format(self.name))
+
