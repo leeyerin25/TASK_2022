@@ -1977,8 +1977,9 @@ class AttackUnit:
 
 
 #적용해보자
-#1번째로 할것: AttackUnit 클래스 적용하기
-firevat1 = AttackUnit("파이어뱃",50,16) #프린트따로 안됨 (생성자라서 지정만해줌)
+#1번째로 할것: AttackUnit 클래스 적용하기 /
+firevat1 = AttackUnit("파이어뱃",50,16) #프린트따로 안됨 (생성자라서 지정만해줌) / 양식은 init 함수 파규먼트!!
+
 #기본 클래스가 적용된 상태에서 내부함수를 적용
 firevat1.attack("5시")
 firevat1.damaged(25)
@@ -2007,7 +2008,7 @@ class AttackUnit(Unit): #1번. name과 hp가 겹치니 상속이 필요 --> 유�
     def __init__(self, name, hp, damage):
         #self.name = name #2번. 겹치는부분삭제
         #self.hp = hp
-        Unit.__init__(self, name, hp)#3번. 클래스 호출
+        Unit.__init__(self, name, hp)#3번. 기본 클래스 호출
         self.damage = damage #4번.(응용): 기본클래스에 없는 다른변수를 추가함
         
 
@@ -2050,7 +2051,6 @@ class AttackUnit(Unit): #1번. name과 hp가 겹치니 상속이 필요 --> 유�
         Unit.__init__(self, name, hp)#3번. 클래스 호출
         self.damage = damage #4번.(응용): 기본클래스에 없는 다른변수를 추가함
         
-
     def attack(self, location):
         print("{0}:{1} 방향으로 공격. 공격력:{2}".format(self.name, location, self.damage))
         
@@ -2061,3 +2061,25 @@ class AttackUnit(Unit): #1번. name과 hp가 겹치니 상속이 필요 --> 유�
         if self.hp <= 0:
           print("{0} 파괴됨".format(self.name))
 
+#클래스 하나 더 추가 : 날수있는 기능 추가
+class Flyable:
+    def __init__(self, flying_speed):
+      self.flying_speed = flying_speed #멤버변수 초기화 = 다른데서도 쓸수있게해주는 작업???
+
+    def fly(self, name, location):
+      print("{0} : {1} 방향으로 날아감. 속도는{2}".format(name,location,self.flying_speed)) #name,location 은 새로받아야하나, flying_speed는 위에 init 함수를 통해 사용이 됨.
+
+
+#공격과 날수있는 유닛 클래스 만들기(다중상속)
+class Flyable_Attack(AttackUnit, Flyable):
+    def __init__(self, name, hp, damage, flying_speed):
+  #1번. 중복된 name,hp,damage 는 어택클래스에 정의되있음.
+      AttackUnit.__init__(self, name, hp, damage)
+  #flyingspeed는 플라이어블에 정의됨
+      Flyable.__init__(self, flying_speed)
+
+valkyrie = Flyable_Attack("발키리",200,6,5)
+valkyrie.fly("발키리","3시")
+
+console
+발키리 : 3시 방향으로 날아감. 속도는5
