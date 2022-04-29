@@ -1919,6 +1919,7 @@ console
 
 
 2.클래스 (필요한 이유:   )
+안에 함수를 메소드라 부름
 class Unit:  #(class 임의 이름)
     def __init__(self, name, hp, damage):
         self.name = name
@@ -2083,3 +2084,10 @@ valkyrie.fly("발키리","3시")
 
 console
 발키리 : 3시 방향으로 날아감. 속도는5
+
+```
+
+list = 
+dict[1] = 4 이건추가하는거임
+
+딕셔너리, 함수 
