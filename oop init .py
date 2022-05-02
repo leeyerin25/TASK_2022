@@ -23,3 +23,34 @@ class User:
 user_1 = User("001","yr")
 print(user_1.id) #출력시에 self.id 에서 self 만 이름을 바꿔준다
 print(user_1.followers)
+
+
+----------------------------
+#TODO 1번째로 직접 만든 클래스 호출하기
+#TODO 2번째로 data 가져오기
+from question_model import Question
+from data import question_data
+
+#list = question_data #데이터정의 틀림
+#TODO 3 데이터 리스트 가져오기
+bank = []
+for question in question_data:
+    text = question["text"]
+    answer = question["answer"]
+    new = Question(text, answer) #퀘스천 함수로 다시 정리해야됨
+    bank.append(new)
+
+print(bank)
+# question = Question #함수정의  틀린버전
+#
+# text_n = list["text"]
+# ansewr_n = list["answer"]
+#
+# for i in range(1, len(list)):
+#     question(text_n, ansewr_n)
+#     print(question.text)
+
+
+
+
+
