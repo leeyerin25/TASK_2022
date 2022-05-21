@@ -1917,6 +1917,32 @@ for i in range(1, 51)
 
 console
 파이썬공부중이에요 라는 내용의 50개 문서가 생김
+	
+	
+	
+	
+1-1. 상대및 절대파일을 이용하여 메일머지프로젝트완성
+
+# 1. 예시문속 변경될 매체 [name] 를 정의한다. 리스트는 추후에 사용될 replace 라는 함수에 사용이 안되기때문.
+PLACEHOLDER = "[name]"
+
+	
+	#2.절대경로를 이용해 이용할 이름 리스트를 가져옴
+with open("./Input/Names/invited_names.txt") as names_file:
+	#3.readlines() 라는 함수를 이용해 리스트로 자른다.
+    names = names_file.readlines()
+
+	#4.예시문 txt 를 가져온다
+with open("./Input/Letters/starting_letter.txt") as letters_file:
+    letters = letters_file.read()
+	#5.아까 나눈 리스트를 for 을 이용해 하나하나 이용한다.
+    for name in names:
+        stripped_name = name.strip()  #strip 이라는 함수는 리스트에는 불가능. 여러개는 for 문 이용 필수
+        new_letter = letters.replace(PLACEHOLDER,stripped_name) #리스트는 replace 가 불가능이라 위에 새로 정의를 해주었다.
+	#6.이때 파일을 open 하는데 "w" 모드로 새롭게 오픈시킨다. 그때 위에 replace 로 이름을 넣은 완벽한 편지 정의한걸 write 내용에 넣어준다.
+	#7.기왕이면 open 시에 이름에 f스트링을 사용해 제목을 분류해주면 좋다.
+        with open(f"./Output/ReadyToSend/letter_for_{stripped_name}.txt", mode="w") as completed_letters:
+            completed_letters.write(new_letter)
 
 
 2.클래스 (필요한 이유:   )
