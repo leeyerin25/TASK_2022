@@ -1,0 +1,113 @@
+with open("../pythonProject2/weather_data.csv") as names_file:
+	#3.readlines() 라는 함수를 이용해 리스트로 자른다.
+    names = names_file.readlines()
+
+print(names)
+
+import csv
+
+# with open("weather_data.csv") as data_file:
+#     data = csv.reader(data_file)
+#     temperature = []
+#     for row in data:
+#         if row[1] != "temp":
+#             temp = row[1]
+#             temperature.append(int(temp))
+#     print(temperature)
+
+# 위에 긴 코드를 pandas를 이용해 쉽게 처리 가능
+
+import pandas
+data = pandas.read_csv("weather_data.csv")
+#1 열의 이름으로 찾을수 있음
+
+print(data["temp"])
+
+#2 데이터를 딕셔너리로 바꾸는 법
+data_dic = data.to_dict()
+
+#3 데이터 temp 열을 리스트로 바꾸는 법
+data_lis = data["temp"].to_list()
+
+avg = (sum(data_lis) / len(data_lis))
+# print(data_lis.mean())
+# print(data["temp"].max())
+
+
+#4 특정 행을 찾는법
+print(data[data.day == "Monday"])
+
+#5 가장높은 온도가 있는 행을 찾아라
+print(data[data.temp == data["temp"].max()])  #data[~~~] 이게 data 객체를 적용시키는것
+
+#5-2 월요일의 온도를 찾아라
+ monday = data[data.day == "Monday"]
+ print(monday.temp)
+
+#6 데이터프레임만들기
+data_dic_2 = {
+    "students" : ["amy" , "jame", "jin"],
+    "score": [70,50,80]
+}
+# 위에 딕셔너리를 이용해 표만들기
+print(pandas.DataFrame(data_dic_2))
+
+
+#화면을 찍었을때 좌표 얻는법
+ def get_mouse_click_coor(x,y):
+    print(x,y)
+turtle.onscreenclick(get_mouse_click_coor)
+screen.mainloop()
+
+
+
+
+
+--------------
+
+pandas를 이용해 게임생성 (csv 가져오고, 비교하고 생성하기)
+
+import turtle
+import pandas
+
+screen = turtle.Screen()
+screen.title("US stage game")
+image = "blank_states_img.gif"
+screen.addshape(image)
+turtle.shape(image)
+
+data = pandas.read_csv("50_states.csv")
+state_datas = data["state"]
+data_state = state_datas.to_list()
+
+
+
+
+
+states_list = []
+while len(states_list) < 50:
+    # 화면에 입력창 띄우는법
+    answer_state = screen.textinput(title=f"{len(states_list)}/50 state", prompt="what is another state name?")
+    answer_state = answer_state.title() #title함수는 첫자대문자 나머지 소문자로 변환
+    if answer_state == "Exit":
+        #유저가 나갈때 못찾은 나머지 리스트 csv 파일에 저장하기
+        missing_state = []
+        for state in data_state:
+            if state not in states_list: #답지에 주가 유저가 작성한 states_list 에 없다면.
+                missing_state.append(state)
+        new_data = pandas.DataFrame(missing_state) #그 미싱 리스트를 df 로 변경
+        new_data.to_csv("states_to_learn.csv") #csv로 변경함
+        break
+    if answer_state in data_state :
+        states_list.append(answer_state)
+        t = turtle.Turtle()
+        t.hideturtle()
+        t.penup()
+        position = data[data.state == answer_state]
+        t.goto(int(position.x), int(position.y))
+        t.write(answer_state) #!!!
+
+
+
+
+
