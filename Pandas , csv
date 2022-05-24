@@ -1,4 +1,4 @@
-```py
+
 with open("../pythonProject2/weather_data.csv") as names_file:
 	#3.readlines() 라는 함수를 이용해 리스트로 자른다.
     names = names_file.readlines()
@@ -111,4 +111,4 @@ while len(states_list) < 50:
 
 
 
-```
+
