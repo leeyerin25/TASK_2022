@@ -7,6 +7,8 @@
 
 TYPE, 제곱 적용 
 
+
+
 ```python
 height = input("enter your height in m: ")
 weight = input("enter your weight in kg: ")
