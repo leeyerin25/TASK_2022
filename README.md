@@ -26,7 +26,6 @@ print(int(result))
 
 ***2 는 2의제곱*
 
-
 #it's teacher's code 👇
 ```python
 bmi = weight_as_int / heiight_as_float **2
@@ -1321,7 +1320,6 @@ my_dict = {
     "key2": value,
         ...
 }
-
 
 
 2. for문을 그냥 돌리면 키만 나온다.
