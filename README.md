@@ -2120,4 +2120,23 @@ console
 list = 
 dict[1] = 4 이건추가하는거임
 
-딕셔너리, 함수 
+```
+#list comprehension
+
+1.기존 숫자 리스트에 1씩 추가하기
+number=[1,2,3]
+new_numbers = [item+1 for item in number]
+
+2.string 분해하기
+name="Angela"
+list=[letter for letter in name]
+
+3.각 숫자 2씩 곱하기
+numm =[num*2 for num in range(1,5)]
+
+4.조건 걸기
+names =["Alex","Beth","Caroline","Dave","Elanor","Freddie"]
+short_name=[name for name in names if len(name) < 5]
+long_name=[name.upper() for name in names if len(name) > 5]
+
+```
