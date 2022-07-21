@@ -2249,9 +2249,11 @@ while len(states_list) < 50:
     if answer_state == "Exit":
         #유저가 나갈때 못찾은 나머지 리스트 csv 파일에 저장하기
         missing_state = []
-        for state in data_state:
+        for state in data_state: 
             if state not in states_list: #답지에 주가 유저가 작성한 states_list 에 없다면.
                 missing_state.append(state)
+	# 위에 4줄 리스트컴프리헨션사용해서
+	# 한줄로 가능 missing_states = [state for state in all_states if state not in guessed_states]
         new_data = pandas.DataFrame(missing_state) #그 미싱 리스트를 df 로 변경
         new_data.to_csv("states_to_learn.csv") #csv로 변경함
         break
