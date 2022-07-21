@@ -2120,9 +2120,12 @@ console
 list = 
 dict[1] = 4 이건추가하는거임
 
-```
+```python
 #list comprehension
 
+[ 출력물 for num in list ]		       
+list 를 하나씩 num 으로 가져가고 최종 출력은 출력물로 가져온다. 출력물에 여러 수식을 걸수가 있음 
+		       
 1.기존 숫자 리스트에 1씩 추가하기
 number=[1,2,3]
 new_numbers = [item+1 for item in number]
@@ -2138,5 +2141,13 @@ numm =[num*2 for num in range(1,5)]
 names =["Alex","Beth","Caroline","Dave","Elanor","Freddie"]
 short_name=[name for name in names if len(name) < 5]
 long_name=[name.upper() for name in names if len(name) > 5]
+	
+5.조건 걸기 - 두개의 txt 중복 체크하기
+with open("file1.txt") as names_file:
+    file1 = names_file.readlines()
+with open("file2.txt") as names_file:
+    file2 = names_file.readlines()
 
+result = [int(text.strip()) for text in file1 if text in file2 ]
+print(result)
 ```
