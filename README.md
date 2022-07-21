@@ -2151,3 +2151,7 @@ with open("file2.txt") as names_file:
 result = [int(text.strip()) for text in file1 if text in file2 ]
 print(result)
 ```
+	
+```python
+
+```
