@@ -2150,6 +2150,19 @@ with open("file2.txt") as names_file:
 
 result = [int(text.strip()) for text in file1 if text in file2 ]
 print(result)
+
+#딕셔너리 컴프리헨션
+import random
+
+names = ['a', 'b', 'c', 'd', 'e']
+
+student_sco = {student:random.randint(1,100) for student in names}
+print(student_sco)
+
+pass_sco = {student:score for (student, score) in student_sco.items() if score>50 }
+print(pass_sco)
+
+
 ```
 	
 ```python
@@ -2252,7 +2265,7 @@ while len(states_list) < 50:
         for state in data_state: 
             if state not in states_list: #답지에 주가 유저가 작성한 states_list 에 없다면.
                 missing_state.append(state)
-	# 위에 4줄 리스트컴프리헨션사용해서
+	# 위에 4줄 리스트 사용해서
 	# 한줄로 가능 missing_states = [state for state in all_states if state not in guessed_states]
         new_data = pandas.DataFrame(missing_state) #그 미싱 리스트를 df 로 변경
         new_data.to_csv("states_to_learn.csv") #csv로 변경함
