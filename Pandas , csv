@@ -45,6 +45,8 @@ print(data[data.temp == data["temp"].max()])  #data[~~~] 이게 data 객체를 �
  monday = data[data.day == "Monday"]
  print(monday.temp)
 
+# day 가 열이고 ㅣㅣㅣ monday가 행임 ㅡㅡㅡ
+
 #6 데이터프레임만들기
 data_dic_2 = {
     "students" : ["amy" , "jame", "jin"],
