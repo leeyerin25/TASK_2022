@@ -2162,6 +2162,8 @@ print(student_sco)
 pass_sco = {student:score for (student, score) in student_sco.items() if score>50 }
 print(pass_sco)
 
+# { key:value for (key,value) in dic.items() }   for 다음 키와 value 두개를 받을때는 in 다음 items() 를 써서 분리시키기 ★
+# for 다음 (key : value ) 는 튜플일경우에만
 
 ```
 	
