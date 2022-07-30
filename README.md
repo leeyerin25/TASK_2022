@@ -2165,6 +2165,27 @@ print(pass_sco)
 # { key:value for (key,value) in dic.items() }   for 다음 키와 value 두개를 받을때는 in 다음 items() 를 써서 분리시키기 ★
 # for 다음 (key : value ) 는 튜플일경우에만
 
+
+#딕셔너리 컴프리헨션 2
+#1 csv -> pandas 이용해서 딕셔너리로 바꾸기
+
+data = pandas.read_csv("nato_phonetic_alphabet.csv")
+pa = {row.letter:row.code for (index, row) in data.iterrows()}
+#row 는 여러개여도 속성이 여러개인거라 . 을 통해 나타낸다. index라는 열은 자동으로 제외
+
+#2 원하는출력물받기
+word = input("enter a key : ").upper()
+li =[]
+for wor in word :
+    li.append(pa[wor])
+print(li)
+
+check = [pa[letter] for letter in word]
+print(check)
+
+enter a key : ye
+['Yankee', 'Echo']
+
 ```
 	
 ```python
