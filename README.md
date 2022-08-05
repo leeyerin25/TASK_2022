@@ -2324,6 +2324,7 @@ console : 4 (7,3,0) {'x':10  'y':64}
 예외처리하기
 ```python
 
+#1번 문제
 fruits = ["Apple", "Pear", "Orange"]
 
 def make_pie(index):
@@ -2336,4 +2337,33 @@ def make_pie(index):
 
 make_pie(4)
 
+	console : fruit pie
+	
+#2번 문제
+
+	likes 가 없는 dict 도 포함하여 총 합을 세라
+	
+	facebook_posts = [
+    {'Likes': 21, 'Comments': 2}, 
+    {'Likes': 13, 'Comments': 2, 'Shares': 1}, 
+    {'Likes': 33, 'Comments': 8, 'Shares': 3}, 
+    {'Comments': 4, 'Shares': 2}, 
+    {'Comments': 1, 'Shares': 1}, 
+    {'Likes': 19, 'Comments': 3}
+]
+
+total_likes = 0
+
+for post in facebook_posts:
+	try:	
+		total_likes = total_likes + post['Likes']
+	except KeyError:
+		post['Likes'] = 0
+	#else:  		#예외만 잡으면 되서 else키는 필요 없다
+		
+
+
+print(total_likes)
+	
+	fruit pie : 86
 ```
