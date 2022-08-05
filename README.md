@@ -2320,3 +2320,20 @@ all_aboard(4, 7, 3, 0, x=10, y=64)
 console : 4 (7,3,0) {'x':10  'y':64}
 
 ```
+
+예외처리하기
+```python
+
+fruits = ["Apple", "Pear", "Orange"]
+
+def make_pie(index):
+	try:	
+    		fruit = fruits[index]
+	except IndexError:		# except 예외 : try 실패후 indexerror 발생이라는 예외를 만듬
+    		print("fruit pie")
+	else:				# else : try 성공후 
+		print(fruit + "pie")
+
+make_pie(4)
+
+```
