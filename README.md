@@ -2320,6 +2320,8 @@ all_aboard(4, 7, 3, 0, x=10, y=64)
 console : 4 (7,3,0) {'x':10  'y':64}
 
 ```
+---
+---
 
 예외처리하기
 ```python
@@ -2366,4 +2368,48 @@ for post in facebook_posts:
 print(total_likes)
 	
 	fruit pie : 86
+```
+예외처리 예시문제
+```py
+#nato 아래코드를 keyerror 이 나올때 가이드 제공 및 올바른 답이 나올때까지 무한 반복해라.
+word = input("Enter a word: ").upper()
+output_list = [phonetic_dict[letter] for letter in word]
+print(output_list)
+
+
+#정답
+def one():
+    word = input("Enter a word: ").upper()
+    try:
+        output_list = [phonetic_dict[letter] for letter in word]
+        print(output_list)
+    except KeyError :
+        print("sorry only letters alphabet")
+        one()
+    else:
+        print(output_list)
+
+one()
+
+```
+#console 
+Enter a word: 123
+sorry only letters alphabet
+Enter a word: 
+
+keyerror 이 안뜰때까지 무한 반복함
+
+```py
+#오답
+word = input("Enter a word: ").upper()
+def one():
+    output_list = [phonetic_dict[letter] for letter in word]
+    print(output_list)
+
+
+try:
+    one()
+except KeyError :
+    print("sorry only letters alphabet")
+    one()   # one 함수는 keyerror 이 뜰시에 예외처리법이 없음. -> try except else 를 함수로 만드는게 무한반복에 
 ```
