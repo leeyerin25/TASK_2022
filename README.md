@@ -34,6 +34,7 @@ print(bmi_as_int)
 ```
 .
 
+
 CONSOLE<br>
 enter your height in m: 1.75 <br>
 enter your weight in kg: 80<br>
