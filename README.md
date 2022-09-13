@@ -24,6 +24,8 @@ print(float(result))
 print(int(result))
 ```
 
+
+
 ***2 는 2의제곱*
 
 #it's teacher's code 👇
