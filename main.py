@@ -2,7 +2,7 @@
 # import mypy
 class Product:
 
-    discount_rate = 0.1 #Product 인스턴스에서 공유가능
+    discount_rate = 0.1 #Product 인스턴스에서 공유가능아앙
 
     def __init__(self, name, price, quantity):
         self.__name = name
